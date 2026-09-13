@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quick Edge AI — Websites & AI Ops for Australian companies</title>
+    <meta
+      name="description"
+      content="Websites you own, AI-powered operations, and AI video — for Australian companies. Call +61 7 4800 3016."
+    />
+    <meta property="og:title" content="Quick Edge AI — Websites & AI Ops" />
+    <meta
+      property="og:description"
+      content="Websites you own, AI-powered operations, and AI video. Ring +61 7 4800 3016 — that's us."
+    />
+    <meta name="theme-color" content="#0a4df0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-text">Quick Edge <span class="ai-tag">AI</span></span>
+        </div>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#voice">Voice AI</a>
+          <a href="#assistant">AI Assistant</a>
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-cta">
+          <a class="btn btn-primary" href="tel:+61748003016" aria-label="Call Quick Edge on +61 7 4800 3016">
+            Call +61 7 4800 3016
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero with live generative motion (AI video showpiece) -->
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas id="hero-canvas" class="hero-canvas" role="img" aria-label="Abstract AI motion background"></canvas>
+        <div class="container hero-content">
+          <h1 id="hero-title" class="hero-title">
+            Websites and AI ops for Australian companies
+          </h1>
+          <p class="hero-subtitle">
+            We design and run modern company websites, AI‑powered lead chase and inbox,
+            Monday numbers, and AI video. Built for owners who want results — and a site
+            that looks current.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="tel:+61748003016">Ring it. That’s us.</a>
+            <a class="btn btn-secondary" href="#assistant">Try the brief‑taker</a>
+          </div>
+          <p class="hero-note">
+            Brand: quickedge.com.au (domain may still be attaching).
+          </p>
+        </div>
+      </section>
+
+      <!-- Live Voice AI demo -->
+      <section id="voice" class="section section-split" data-animate>
+        <div class="container split">
+          <div class="split-col">
+            <h2 class="section-title">Live voice AI</h2>
+            <p class="section-lead">
+              Call <a href="tel:+61748003016">+61 7 4800 3016</a>. That’s our AI line — a real demo.
+              It captures your details and routes the request (John intake → Val).
+            </p>
+            <ul class="checklist">
+              <li>Real number. Try it now.</li>
+              <li>Clear message trail in your inbox.</li>
+              <li>Hand‑off to a human when it matters.</li>
+            </ul>
+            <div class="inline-ctas">
+              <a class="btn btn-primary" href="tel:+61748003016">Call now</a>
+              <a class="btn btn-ghost" href="#contact">Enquire by email</a>
+            </div>
+          </div>
+          <div class="split-col">
+            <div class="phone-card" role="img" aria-label="Phone call demo card">
+              <div class="phone-status">
+                <span class="pulse" aria-hidden="true"></span>
+                AI line is live
+              </div>
+              <div class="phone-body">
+                <div class="call-log">
+                  <div class="call-row you">
+                    <span class="who">You</span>
+                    <span class="msg">Calling +61 7 4800 3016…</span>
+                  </div>
+                  <div class="call-row ai">
+                    <span class="who">AI</span>
+                    <span class="msg">Hi — this is Quick Edge. What do you need help with?</span>
+                  </div>
+                  <div class="call-row you">
+                    <span class="who">You</span>
+                    <span class="msg">New company website.</span>
+                  </div>
+                  <div class="call-row ai">
+                    <span class="who">AI</span>
+                    <span class="msg">Got it. I’ll grab a few details and pass to Val for scope.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="phone-footer">
+                <a class="btn btn-secondary small" href="tel:+61748003016">Ring it</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- On‑page AI assistant / brief‑taker (scripted, demo label) -->
+      <section id="assistant" class="section" data-animate>
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title">Brief‑taker</h2>
+            <span class="badge-demo" aria-label="Demo">Demo</span>
+          </div>
+          <p class="section-lead">
+            One‑line brief. We reflect the next step. This on‑page assistant is a
+            scripted demo — no client names, no invented numbers, accurate pricing only.
+          </p>
+
+          <div class="assistant">
+            <div id="assistant-feed" class="assistant-feed" aria-live="polite" aria-relevant="additions"></div>
+            <form id="assistant-form" class="assistant-form" autocomplete="off">
+              <label class="visually-hidden" for="assistant-input">Your brief</label>
+              <input
+                id="assistant-input"
+                class="assistant-input"
+                name="brief"
+                type="text"
+                inputmode="text"
+                placeholder="Tell us in one line: website / ops / video / workshop"
+                maxlength="240"
+                required
+              />
+              <button class="btn btn-primary" type="submit">Reflect next step</button>
+            </form>
+            <div class="quick-suggestions" role="listbox" aria-label="Quick suggestions">
+              <button type="button" class="pill" data-brief="website">Website</button>
+              <button type="button" class="pill" data-brief="ops">Ops</button>
+              <button type="button" class="pill" data-brief="video">Video</button>
+              <button type="button" class="pill" data-brief="workshop">Workshop</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services" class="section section-grid" data-animate>
+        <div class="container">
+          <h2 class="section-title">Services</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Company websites</h3>
+              <p>Design, build, and host a fast, modern site you own.</p>
+              <ul class="bullets">
+                <li>Clean IA, strong typography, responsive</li>
+                <li>Analytics + basic SEO</li>
+                <li>Care plan, updates, backups</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>AI operations</h3>
+              <p>Lead chase, inbox triage, and Monday numbers that ship.</p>
+              <ul class="bullets">
+                <li>AI assistants for replies and follow‑ups</li>
+                <li>Inbound capture and hand‑offs</li>
+                <li>Dashboards your team actually uses</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>AI video</h3>
+              <p>Generated and composited motion for ads, pages, and reels.</p>
+              <ul class="bullets">
+                <li>15–45s cuts for socials and paid</li>
+                <li>Landing page loops and explainers</li>
+                <li>Quoted per brief</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Phone & SMS</h3>
+              <p>Inbound capture, nurture, and routing — quoted per brief.</p>
+              <ul class="bullets">
+                <li>Australian numbers</li>
+                <li>Opt‑in SMS with compliant unsubscribes</li>
+                <li>Clear paper trail</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" class="section" data-animate>
+        <div class="container">
+          <h2 class="section-title">Pricing</h2>
+          <div class="pricing-grid">
+            <article class="price-card">
+              <h3>Website</h3>
+              <p class="price">
+                <span class="amount">AU$3,500</span>
+                <span class="note">once</span>
+              </p>
+              <p class="sub">Care plan AU$99/mo (GST incl.)</p>
+            </article>
+            <article class="price-card">
+              <h3>AI Ops</h3>
+              <ul class="tiers">
+                <li><strong>Setup</strong> — AU$2,990</li>
+                <li><strong>Setup + Nurture</strong> — AU$5,490</li>
+                <li><strong>Retainer</strong> — AU$1,490/mo</li>
+              </ul>
+              <p class="sub">Prices GST excl.</p>
+            </article>
+            <article class="price-card">
+              <h3>AI Video</h3>
+              <p class="sub">Quoted per brief</p>
+            </article>
+            <article class="price-card">
+              <h3>Phone & SMS</h3>
+              <p class="sub">Quoted per brief</p>
+            </article>
+            <article class="price-card">
+              <h3>SEQ Workshop</h3>
+              <p class="price">
+                <span class="amount">AU$990</span>
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- HITL / Assurance -->
+      <section class="section section-accent" data-animate>
+        <div class="container">
+          <h2 class="section-title">Humans stay in the loop</h2>
+          <div class="hitl">
+            <div class="hitl-item">
+              <h3>Approver role</h3>
+              <p>People still hit send. Nothing ships without an Approver.</p>
+            </div>
+            <div class="hitl-item">
+              <h3>Paper trail</h3>
+              <p>Every action is logged for context and accountability.</p>
+            </div>
+            <div class="hitl-item">
+              <h3>Gate ON (first 2 weeks)</h3>
+              <p>We run with a hard gate until patterns and guardrails are proven.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section" data-animate>
+        <div class="container contact">
+          <div>
+            <h2 class="section-title">Contact</h2>
+            <p>Call us or send an enquiry.</p>
+            <div class="contact-ctas">
+              <a class="btn btn-primary" href="tel:+61748003016">Call +61 7 4800 3016</a>
+              <a class="btn btn-secondary" href="mailto:slewis877@gmail.com?subject=Quick%20Edge%20enquiry">Enquire by email</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <h3>Quick Edge AI</h3>
+            <p>Brand: quickedge.com.au</p>
+            <address>
+              Suite 186/52 Currumbin Creek Road<br />
+              Currumbin Waters QLD 4223
+            </address>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <span class="brand-text">Quick Edge <span class="ai-tag">AI</span></span>
+          <p class="legal">
+            NextKey Pty Ltd trading as Quick Edge AI (ABN 28 689 818 264)
+          </p>
+          <p class="legal">
+            Suite 186/52 Currumbin Creek Road, Currumbin Waters QLD 4223
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#assistant">Brief‑taker</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="./script.js" defer></script>
+  </body>
+  </html>
