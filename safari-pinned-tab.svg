@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Monochrome mask icon for Safari pinned tabs -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <polygon points="256,56 456,256 256,456 56,256" fill="#000000"/>
+  <polygon points="256,156 356,256 256,356 156,256" fill="#000000"/>
+</svg>
+
