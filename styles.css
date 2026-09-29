@@ -82,6 +82,11 @@ body {
   height: 68px;
   gap: 16px;
 }
+.brand-logo img {
+  display: block;
+  height: 28px;
+  width: auto;
+}
 .brand {
   display: flex;
   align-items: center;

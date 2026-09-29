@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Quick Edge Q">
+  <defs>
+    <linearGradient id="qg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a4df0"/>
+      <stop offset="100%" stop-color="#6ee7ff"/>
+    </linearGradient>
+    <linearGradient id="tail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#49a9ff"/>
+      <stop offset="100%" stop-color="#67f2e5"/>
+    </linearGradient>
+    <!-- mask to open the ring for the tail outlet -->
+    <mask id="cut">
+      <rect width="256" height="256" fill="#fff"/>
+      <!-- carve a wedge from the ring at ~300deg -->
+      <path d="M80 196 L116 156 L148 188 L112 228 Z" fill="#000"/>
+    </mask>
+  </defs>
+  <!-- Q ring -->
+  <circle cx="128" cy="112" r="78" fill="none" stroke="url(#qg)" stroke-width="36" stroke-linecap="round" mask="url(#cut)"/>
+  <!-- lightning/edge tail -->
+  <path d="M76 188 L122 160 L148 236 L96 206 L56 212 Z" fill="url(#tail)"/>
+</svg>
