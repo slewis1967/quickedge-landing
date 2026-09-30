@@ -14,6 +14,16 @@
       content="Websites you own, AI-powered operations, and AI video. Ring +61 7 4800 3016 — that's us."
     />
     <meta name="theme-color" content="#0a4df0" />
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Social -->
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og-image.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,10 +37,9 @@
 
     <header class="site-header">
       <div class="container header-inner">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">◆</span>
-          <span class="brand-text">Quick Edge <span class="ai-tag">AI</span></span>
-        </div>
+        <a class="brand brand-logo" href="/" aria-label="Quick Edge AI — Home">
+          <img src="/assets/brand/quickedge-logo.png" alt="Quick Edge AI" width="196" height="40" />
+        </a>
         <nav class="site-nav" aria-label="Primary">
           <a href="#voice">Voice AI</a>
           <a href="#assistant">AI Assistant</a>
@@ -292,7 +301,9 @@
     <footer class="site-footer">
       <div class="container footer-inner">
         <div>
-          <span class="brand-text">Quick Edge <span class="ai-tag">AI</span></span>
+          <a class="brand brand-logo" href="/" aria-label="Quick Edge AI — Home">
+            <img src="/assets/brand/quickedge-logo.png" alt="Quick Edge AI" width="160" height="34" />
+          </a>
           <p class="legal">
             NextKey Pty Ltd trading as Quick Edge AI (ABN 28 689 818 264)
           </p>
