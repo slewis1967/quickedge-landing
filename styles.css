@@ -146,10 +146,24 @@ body {
   z-index: 0;
   opacity: 0.8;
 }
+/* Hero art: AI-generated website/phone visual, faded into the page on its left edge */
+.hero-art {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(62%, 976px);
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 28%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 28%);
+}
 .hero-content {
   position: relative;
   z-index: 1;
-  padding: 84px 0 56px;
+  width: 100%;
+  padding: 84px 24px 56px;
 }
 .hero-title {
   font-size: clamp(32px, 6vw, 56px);
@@ -162,6 +176,13 @@ body {
   font-size: clamp(16px, 2.4vw, 20px);
   max-width: 60ch;
   margin: 0 0 24px;
+}
+/* Keep hero copy clear of the hero art on desktop */
+@media (min-width: 901px) {
+  .hero-title,
+  .hero-subtitle {
+    max-width: 560px;
+  }
 }
 .hero-ctas {
   display: flex;
@@ -515,6 +536,15 @@ body {
   }
 }
 @media (max-width: 900px) {
+  .hero-art {
+    position: relative;
+    top: auto;
+    transform: none;
+    width: 100%;
+    margin-top: -24px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+  }
   .grid {
     grid-template-columns: 1fr;
   }
