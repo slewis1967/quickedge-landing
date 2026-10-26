@@ -273,3 +273,7 @@ document.querySelectorAll('.card, .price-card').forEach((card) => {
   // Seed one message
   post('ai', 'Tell us what you need in one line (e.g., “website”, “ops”, “video”).');
 })();
+
+// Keep the footer copyright year current
+const copyrightYear = document.getElementById('copyright-year');
+if (copyrightYear) copyrightYear.textContent = String(new Date().getFullYear());
