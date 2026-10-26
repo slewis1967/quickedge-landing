@@ -135,7 +135,7 @@ body {
   overflow: clip;
   border-bottom: 1px solid var(--line);
   background: radial-gradient(1200px 800px at 80% -10%, rgba(10, 77, 240, 0.08), transparent 60%),
-    radial-gradient(900px 600px at -10% 30%, rgba(13, 178, 107, 0.08), transparent 55%),
+    radial-gradient(900px 600px at -10% 30%, rgba(0, 180, 255, 0.08), transparent 55%),
     var(--bg);
 }
 .hero-canvas {
@@ -145,19 +145,6 @@ body {
   height: 100%;
   z-index: 0;
   opacity: 0.8;
-}
-/* Hero art: AI-generated website/phone visual, faded into the page on its left edge */
-.hero-art {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(62%, 976px);
-  height: auto;
-  z-index: 0;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 28%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 28%);
 }
 .hero-content {
   position: relative;
@@ -536,15 +523,6 @@ body {
   }
 }
 @media (max-width: 900px) {
-  .hero-art {
-    position: relative;
-    top: auto;
-    transform: none;
-    width: 100%;
-    margin-top: -24px;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
-  }
   .grid {
     grid-template-columns: 1fr;
   }
@@ -563,4 +541,455 @@ body {
   .footer-inner {
     grid-template-columns: 1fr;
   }
+}
+
+/* ------------------------------
+   Wow layer: aurora, rotator, floating hero visual, chips, marquee, dark band
+--------------------------------*/
+.hero-aurora {
+  position: absolute;
+  inset: -20% -10%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(70px);
+  opacity: 0.55;
+}
+.hero-aurora span {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  animation: aurora 18s ease-in-out infinite alternate;
+}
+.hero-aurora span:nth-child(1) {
+  width: 46vw;
+  height: 46vw;
+  left: 48%;
+  top: 0;
+  background: radial-gradient(circle, rgba(10, 77, 240, 0.55), transparent 65%);
+}
+.hero-aurora span:nth-child(2) {
+  width: 38vw;
+  height: 38vw;
+  left: 66%;
+  top: 34%;
+  background: radial-gradient(circle, rgba(0, 200, 255, 0.5), transparent 65%);
+  animation-duration: 22s;
+  animation-delay: -6s;
+}
+.hero-aurora span:nth-child(3) {
+  width: 34vw;
+  height: 34vw;
+  left: 8%;
+  top: 46%;
+  background: radial-gradient(circle, rgba(124, 92, 255, 0.35), transparent 65%);
+  animation-duration: 26s;
+  animation-delay: -11s;
+}
+@keyframes aurora {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, 8%) scale(1.15);
+  }
+  100% {
+    transform: translate(5%, -6%) scale(0.95);
+  }
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brand-ink);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(10, 77, 240, 0.18);
+  box-shadow: 0 6px 24px rgba(10, 77, 240, 0.12);
+  backdrop-filter: blur(8px);
+}
+.eyebrow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00c2ff;
+  animation: pulse-cyan 1.8s infinite;
+}
+@keyframes pulse-cyan {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 194, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 194, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 194, 255, 0);
+  }
+}
+
+.hero-title {
+  font-size: clamp(34px, 6vw, 62px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+.gradient-text {
+  background: linear-gradient(100deg, #0a4df0 0%, #00b4ff 35%, #7c5cff 65%, #0a4df0 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s linear infinite;
+}
+@keyframes gradient-pan {
+  to {
+    background-position: -220% 0;
+  }
+}
+/* Rotating phrase sits on its own line so the headline height never jumps */
+.hero-rotator {
+  display: block;
+  white-space: nowrap;
+}
+.rotator-word {
+  display: inline-block;
+  transition: opacity 280ms ease, transform 280ms ease, filter 280ms ease;
+}
+.rotator-word.out {
+  opacity: 0;
+  transform: translateY(0.3em);
+  filter: blur(6px);
+}
+
+.hero-visual {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(62%, 976px);
+  z-index: 0;
+  pointer-events: none;
+  perspective: 1200px;
+}
+.hero-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 300ms ease-out;
+  animation: float 7s ease-in-out infinite;
+}
+.hero-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 28%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 28%);
+}
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -14px;
+  }
+}
+.hero-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 34px rgba(10, 46, 147, 0.18), inset 0 0 0 1px rgba(10, 77, 240, 0.08);
+  backdrop-filter: blur(12px) saturate(160%);
+  transform: translateZ(60px);
+  animation: chip-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both, float 6s ease-in-out infinite;
+}
+.chip-a {
+  left: 30%;
+  top: 12%;
+  animation-delay: 300ms, -1s;
+}
+.chip-b {
+  right: 6%;
+  top: 46%;
+  animation-delay: 650ms, -3s;
+}
+.chip-c {
+  left: 34%;
+  bottom: 10%;
+  animation-delay: 1000ms, -2s;
+}
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateZ(60px) translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(60px);
+  }
+}
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
+  animation: pulse 1.8s infinite;
+}
+.chip-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand), #00b4ff);
+}
+
+.btn {
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn-primary {
+  background: linear-gradient(135deg, #0a4df0, #2f6bff 60%, #00a8ff);
+  box-shadow: 0 10px 28px rgba(10, 77, 240, 0.35);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0846da, #2a62f0 60%, #0096e6);
+  box-shadow: 0 14px 34px rgba(10, 77, 240, 0.45);
+}
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: shine 3.6s ease-in-out infinite;
+}
+@keyframes shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee-track span {
+  padding: 18px 28px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.marquee-track span::before {
+  content: "✦";
+  margin-right: 28px;
+  color: #00b4ff;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Cursor spotlight + gradient edge on cards */
+.card,
+.price-card,
+.hitl-item {
+  position: relative;
+}
+.card::before,
+.price-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(10, 77, 240, 0.1), transparent 60%);
+}
+.card::after,
+.price-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), #0a4df0, #00b4ff 40%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.card:hover::before,
+.card:hover::after,
+.price-card:hover::before,
+.price-card:hover::after {
+  opacity: 1;
+}
+
+/* Dark "humans in the loop" band */
+.section-dark {
+  position: relative;
+  overflow: clip;
+  color: #eef2ff;
+  background: radial-gradient(800px 400px at 15% 0%, rgba(10, 77, 240, 0.45), transparent 60%),
+    radial-gradient(700px 400px at 90% 100%, rgba(0, 180, 255, 0.25), transparent 60%), #070b1a;
+}
+.section-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+.section-dark .container {
+  position: relative;
+}
+.section-dark .hitl-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 1px rgba(10, 77, 240, 0.15), 0 20px 50px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+.section-dark .hitl-item:hover {
+  border-color: rgba(0, 180, 255, 0.5);
+}
+.section-dark .hitl-item p {
+  color: #a9b4d0;
+}
+
+/* Staggered reveal for grid children, then lift on hover */
+[data-animate] :is(.card, .price-card, .hitl-item) {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 500ms ease, transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+[data-animate].in-view :is(.card, .price-card, .hitl-item) {
+  opacity: 1;
+  transform: none;
+}
+[data-animate].in-view :is(.card, .price-card, .hitl-item):nth-child(2) {
+  transition-delay: 80ms;
+}
+[data-animate].in-view :is(.card, .price-card, .hitl-item):nth-child(3) {
+  transition-delay: 160ms;
+}
+[data-animate].in-view :is(.card, .price-card, .hitl-item):nth-child(4) {
+  transition-delay: 240ms;
+}
+[data-animate].in-view :is(.card, .price-card, .hitl-item):nth-child(5) {
+  transition-delay: 320ms;
+}
+[data-animate].in-view :is(.card, .price-card, .hitl-item):hover {
+  transition-delay: 0ms;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(10, 46, 147, 0.14);
+}
+
+@media (max-width: 900px) {
+  .hero-visual {
+    position: relative;
+    top: auto;
+    transform: none;
+    width: 100%;
+    margin-top: -24px;
+  }
+  .hero-art {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+  }
+  .hero-chip {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+  .chip-a {
+    left: 4%;
+    top: 14%;
+  }
+  .chip-b {
+    right: 3%;
+    top: 50%;
+  }
+  .chip-c {
+    left: 10%;
+    bottom: 8%;
+  }
+  .hero-aurora {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  [data-animate],
+  [data-animate] :is(.card, .price-card, .hitl-item) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.card-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #0a4df0, #00b4ff);
+  box-shadow: 0 10px 24px rgba(10, 77, 240, 0.3);
+}
+.card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.card h3 {
+  margin-top: 0;
 }

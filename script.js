@@ -1,5 +1,7 @@
 'use strict';
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // Scroll-triggered reveal
 const observer = new IntersectionObserver(
   (entries) => {
@@ -58,14 +60,23 @@ document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el)
     // softly tinted backdrop
     const grad = ctx.createLinearGradient(0, 0, width, height);
     grad.addColorStop(0, 'rgba(10,77,240,0.06)');
-    grad.addColorStop(1, 'rgba(13,178,107,0.06)');
+    grad.addColorStop(1, 'rgba(0,180,255,0.06)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, width, height);
 
-    // update node positions
+    // update node positions; nodes near the cursor drift towards it
     for (const n of nodes) {
       n.x += n.vx + Math.sin((n.y + t) * 0.002) * 0.15;
       n.y += n.vy + Math.cos((n.x - t) * 0.002) * 0.15;
+      if (mouse.active) {
+        const mdx = mouse.x - n.x;
+        const mdy = mouse.y - n.y;
+        const md = Math.hypot(mdx, mdy);
+        if (md < 180 && md > 1) {
+          n.x += (mdx / md) * 0.6;
+          n.y += (mdy / md) * 0.6;
+        }
+      }
       if (n.x < -20) n.x = width + 20;
       if (n.x > width + 20) n.x = -20;
       if (n.y < -20) n.y = height + 20;
@@ -92,6 +103,20 @@ document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el)
       }
     }
 
+    // link nearby nodes to the cursor in cyan
+    if (mouse.active) {
+      for (const n of nodes) {
+        const dist = Math.hypot(mouse.x - n.x, mouse.y - n.y);
+        if (dist < 200) {
+          ctx.strokeStyle = `rgba(0,180,255,${(1 - dist / 200) * 0.6})`;
+          ctx.beginPath();
+          ctx.moveTo(mouse.x, mouse.y);
+          ctx.lineTo(n.x, n.y);
+          ctx.stroke();
+        }
+      }
+    }
+
     // draw nodes
     for (const n of nodes) {
       ctx.beginPath();
@@ -101,10 +126,67 @@ document.querySelectorAll('[data-animate]').forEach((el) => observer.observe(el)
     }
 
     t += 1;
-    requestAnimationFrame(step);
+    if (running) requestAnimationFrame(step);
   }
-  requestAnimationFrame(step);
+
+  const mouse = { x: 0, y: 0, active: false };
+  const hero = canvas.closest('.hero');
+  hero.addEventListener('pointermove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+    mouse.active = true;
+  });
+  hero.addEventListener('pointerleave', () => (mouse.active = false));
+
+  // Only animate while the hero is on screen
+  let running = false;
+  new IntersectionObserver(([entry]) => {
+    const wasRunning = running;
+    running = entry.isIntersecting && !reduceMotion;
+    if (running && !wasRunning) requestAnimationFrame(step);
+  }).observe(canvas);
+  if (reduceMotion) step();
 })();
+
+// Headline rotator: cycles the gradient phrase
+(function heroRotator() {
+  const el = document.querySelector('.rotator-word[data-words]');
+  if (!el || reduceMotion) return;
+  const words = el.dataset.words.split('|');
+  let i = 0;
+  setInterval(() => {
+    el.classList.add('out');
+    setTimeout(() => {
+      i = (i + 1) % words.length;
+      el.textContent = words[i];
+      el.classList.remove('out');
+    }, 300);
+  }, 2600);
+})();
+
+// Hero visual: 3D tilt towards the cursor
+(function heroTilt() {
+  const hero = document.querySelector('.hero');
+  const tilt = document.querySelector('.hero-tilt');
+  if (!hero || !tilt || reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
+  hero.addEventListener('pointermove', (e) => {
+    const r = hero.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    tilt.style.transform = `rotateY(${px * -10}deg) rotateX(${py * 8}deg)`;
+  });
+  hero.addEventListener('pointerleave', () => (tilt.style.transform = ''));
+})();
+
+// Cards: spotlight follows the cursor
+document.querySelectorAll('.card, .price-card').forEach((card) => {
+  card.addEventListener('pointermove', (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+});
 
 // Assistant demo (scripted)
 (function assistantDemo() {
